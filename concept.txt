@@ -1,0 +1,14 @@
+Game of life
+Alive cells have a color (depending on the player that spawned it)
+Further cells creations follow the rule:
+	If all parents are non-players, the cell is non-player
+	If at least one parent is player1 and none is player2, the cell is player1
+	If at least one parent is player1 and at least one parent is player2, the cell is non-player
+Every turn a player can change ANY cell
+Start with a random grid
+Variable size and density
+If both players choose the same cell twice in a row => DRAW
+WIN CONDITION:
+	After n generations, the player with the most cells win
+OR
+	Whenever a player has less than n cells, they lose and their opponent wins
