@@ -3,6 +3,7 @@ import copy
 from pygame.locals import *
 from board import Board
 from time_wrapper import limit_time
+from cell import Cell
 
 def sanitize_moves(p1_move, p2_move, board):
     """
@@ -40,12 +41,12 @@ def game(player1, player2, col, ui, synchr, nb_moves, density):
     p1 = __import__(player1, globals(), locals(), ['Player'], 0).Player()
     p2 = __import__(player2, globals(), locals(), ['Player'], 0).Player()
 
-    limit_time(lambda: p1.preprocessing(copy.deepcopy(board.automata)), 1)
-    limit_time(lambda: p2.preprocessing(copy.deepcopy(board.automata)), 1)
+    limit_time(lambda: p1.preprocessing(copy.deepcopy(board.automata), Cell.PLAYER1), 1)
+    limit_time(lambda: p2.preprocessing(copy.deepcopy(board.automata), Cell.PLAYER2), 1)
 
     while True:  # Game loop
-        p1_move = limit_time(lambda: p1.turn(copy.deepcopy(board.automata)), 0.2)
-        p2_move = limit_time(lambda: p2.turn(copy.deepcopy(board.automata)), 0.2)
+        p1_move = limit_time(lambda: p1.turn(copy.deepcopy(board.automata), Cell.PLAYER1), 0.2)
+        p2_move = limit_time(lambda: p2.turn(copy.deepcopy(board.automata), Cell.PLAYER2), 0.2)
         p1_move, p2_move = sanitize_moves(p1_move, p2_move, board)
         board.play(p1_move, p2_move)
         if ui:
