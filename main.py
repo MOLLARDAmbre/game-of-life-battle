@@ -11,6 +11,9 @@ parser.add_argument('--density', dest='density', help="The proportion of alive c
 parser.add_argument('--nb-games', dest='nb_games', help="Runs several games and returns stats for both players", default=1)
 parser.add_argument('--p1', dest="p1", help="The location of your player 1", default="AIs/player.py")
 parser.add_argument('--p2', dest="p2", help="The location of your player 2", default="AIs/player.py")
+parser.add_argument('--width', dest='width', help="The number of cells horizontally", default=15)
+parser.add_argument('--height', dest='height', help="The number of cells vertically", default=15)
+
 
 args = parser.parse_args()
 
@@ -21,6 +24,7 @@ if args.night_mode:
 res = []
 
 for game in range(int(args.nb_games)):
-    res.append(game_loop.game(args.p1.replace('/', '.')[:-3], args.p2.replace('/', '.')[:-3], col, args.ui, args.synchronous, int(args.nb_moves), float(args.density)))
+    res.append(game_loop.game(args.p1.replace('/', '.')[:-3], args.p2.replace('/', '.')[:-3], int(args.width),\
+     int(args.height), col, args.ui, args.synchronous, int(args.nb_moves), float(args.density)))
 
 print(res)

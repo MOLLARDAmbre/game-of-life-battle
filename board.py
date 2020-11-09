@@ -8,11 +8,11 @@ class Board():
 
     def __init__(self, colors=Colors(), density=0.2, ui=True, width = 15, height = 15, width_mul = 20, height_mul = 20):
         self.colors = colors
-        self.width = width
-        self.height = height
-        self.width_mul = width_mul
-        self.height_mul = height_mul
-        self.automata = cellular_automata.init_board(density)
+        self.width = width  # Width of the board
+        self.height = height  # Height of the board
+        self.width_mul = width_mul  # Horizontal lenght of a cell
+        self.height_mul = height_mul  # Vertical length of a cell
+        self.automata = cellular_automata.init_board(density, self.width, self.height)
         self.ui = ui
         if self.ui:
             self.display_surface = pygame.display.set_mode((width * width_mul, height * height_mul))

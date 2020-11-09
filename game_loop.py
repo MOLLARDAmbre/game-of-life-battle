@@ -30,13 +30,13 @@ def exit(board):
     pygame.quit()
     return board.get_results()
 
-def game(player1, player2, col, ui, synchr, nb_moves, density):
+def game(player1, player2, width, height, col, ui, synchr, nb_moves, density):
     if ui:
         pygame.init()
         clock = pygame.time.Clock()
         FPS = 4
 
-    board = Board(colors=col, density=density, ui=ui)
+    board = Board(width=width, height=height, colors=col, density=density, ui=ui)
 
     p1 = __import__(player1, globals(), locals(), ['Player'], 0).Player()
     p2 = __import__(player2, globals(), locals(), ['Player'], 0).Player()
