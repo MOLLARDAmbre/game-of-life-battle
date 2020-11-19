@@ -14,4 +14,4 @@ def other_player(cell_color):
     return None # Should never be reached
 
 def next_board_state(board):
-    return cellular_automata.next(board)
+    return next(board)
