@@ -30,7 +30,7 @@ def exit(board):
     pygame.quit()
     return board.get_results()
 
-def game(player1, player2, width, height, col, ui, synchr, nb_moves, density):
+def game(player1, player2, width, height, col, ui, synchr, nb_moves, density, test):
     if ui:
         pygame.init()
         clock = pygame.time.Clock()
@@ -40,6 +40,9 @@ def game(player1, player2, width, height, col, ui, synchr, nb_moves, density):
 
     p1 = __import__(player1, globals(), locals(), ['Player'], 0).Player()
     p2 = __import__(player2, globals(), locals(), ['Player'], 0).Player()
+
+    if test:
+        board.set_board(p1.test(board.automata, Cell.PLAYER1))
 
     limit_time(lambda: p1.preprocessing(copy.deepcopy(board.automata), Cell.PLAYER1), 1)
     limit_time(lambda: p2.preprocessing(copy.deepcopy(board.automata), Cell.PLAYER2), 1)

@@ -13,6 +13,6 @@ def limit_time(f, t_max):
     try:
         res = f()  # Try to run f
     except:
-        res = None  # Took too long
+        res = None  # Took too long or raised an exception
     signal.setitimer(signal.ITIMER_VIRTUAL, 0)  # Removes the sigvtalrm supposed to be raised soon
     return res

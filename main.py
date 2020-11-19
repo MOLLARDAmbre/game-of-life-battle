@@ -13,7 +13,7 @@ parser.add_argument('--p1', dest="p1", help="The location of your player 1", def
 parser.add_argument('--p2', dest="p2", help="The location of your player 2", default="AIs/player.py")
 parser.add_argument('--width', dest='width', help="The number of cells horizontally", default=15)
 parser.add_argument('--height', dest='height', help="The number of cells vertically", default=15)
-
+parser.add_argument('--test', dest='test', action='store_true', help="Runs the game in a test state, allowing to start with a given configuration specified in the AI file")
 
 args = parser.parse_args()
 
@@ -21,10 +21,13 @@ col = Colors()
 if args.night_mode:
     col.night_mode()
 
+if args.test:
+    args.p2 = "AIs/dummy.py"
+
 res = []
 
 for game in range(int(args.nb_games)):
     res.append(game_loop.game(args.p1.replace('/', '.')[:-3], args.p2.replace('/', '.')[:-3], int(args.width),\
-     int(args.height), col, args.ui, args.synchronous, int(args.nb_moves), float(args.density)))
+     int(args.height), col, args.ui, args.synchronous, int(args.nb_moves), float(args.density), args.test))
 
 print(res)

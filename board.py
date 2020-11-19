@@ -39,6 +39,9 @@ class Board():
                     col = self.colors.PLAYER2
                 pygame.draw.rect(self.display_surface, col, (j * self.width_mul + 1, i * self.height_mul + 1, self.width_mul - 1, self.height_mul - 1))
 
+    def set_board(self, automata):
+        self.automata = automata
+
     def next(self):  # Update the cellular automata beneath
         self.automata = cellular_automata.next(self.automata)
 

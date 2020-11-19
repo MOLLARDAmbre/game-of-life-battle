@@ -3,6 +3,15 @@ from random import randint
 
 class Player():
 
+    def test(self, board, player):
+        """
+        This function allows you to set the board to your initialisation position
+        :param board: 2D array of cells
+        :param player: Either Cell.PLAYER1 or Cell.PLAYER2 depending on which player you are
+        :return: 2D array of cells initialised
+        """
+        return board
+
     def preprocessing(self, board, player):
         """
         This function allows you to have time to preprocess stuff before the game starts
