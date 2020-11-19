@@ -15,3 +15,11 @@ def other_player(cell_color):
 
 def next_board_state(board):
     return next(board)
+
+def play(board, move, player):
+    i, j = move
+    if (board[i][j] != Cell.DEAD):
+        board[i][j] = Cell.DEAD
+    else:
+        board[i][j] = player
+    return board

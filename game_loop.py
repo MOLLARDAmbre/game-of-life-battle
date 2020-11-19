@@ -31,30 +31,32 @@ def exit(board):
     return board.get_results()
 
 def game(player1, player2, width, height, col, ui, synchr, nb_moves, density, test):
-    if ui:
-        pygame.init()
-        clock = pygame.time.Clock()
-        FPS = 4
 
     board = Board(width=width, height=height, colors=col, density=density, ui=ui)
-
     p1 = __import__(player1, globals(), locals(), ['Player'], 0).Player()
     p2 = __import__(player2, globals(), locals(), ['Player'], 0).Player()
 
     if test:
         board.set_board(p1.test(board.automata, Cell.PLAYER1))
 
+    if ui:
+        pygame.init()
+        clock = pygame.time.Clock()
+        FPS = 4
+        board.draw_cells()
+        pygame.display.update()
+
     limit_time(lambda: p1.preprocessing(copy.deepcopy(board.automata), Cell.PLAYER1), 1)
     limit_time(lambda: p2.preprocessing(copy.deepcopy(board.automata), Cell.PLAYER2), 1)
 
     while True:  # Game loop
+        if ui:
+            board.draw_cells()
+            pygame.display.update()
         p1_move = limit_time(lambda: p1.turn(copy.deepcopy(board.automata), Cell.PLAYER1), 0.2)
         p2_move = limit_time(lambda: p2.turn(copy.deepcopy(board.automata), Cell.PLAYER2), 0.2)
         p1_move, p2_move = sanitize_moves(p1_move, p2_move, board)
         board.play(p1_move, p2_move)
-        if ui:
-            board.draw_cells()
-            pygame.display.update()
         board.next()
         nb_moves -= 1
         if nb_moves == 0:

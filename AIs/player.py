@@ -38,4 +38,4 @@ class Player():
         """
         x = randint(0, len(board) - 1)
         y = randint(0, len(board[0]) - 1)
-        return None
+        return (x, y)

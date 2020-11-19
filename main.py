@@ -1,6 +1,7 @@
 import argparse
 import game_loop
 from colors import Colors
+from tqdm import tqdm
 
 parser = argparse.ArgumentParser(description='A game based on the Game of Life')
 parser.add_argument('--night-mode', dest='night_mode', action='store_true', help="Changes the colors to accomodate the eyes")
@@ -26,8 +27,18 @@ if args.test:
 
 res = []
 
-for game in range(int(args.nb_games)):
+nb_wins = {'p1': 0, 'p2': 0, 'tie': 0}
+
+for game in tqdm(range(int(args.nb_games))):
     res.append(game_loop.game(args.p1.replace('/', '.')[:-3], args.p2.replace('/', '.')[:-3], int(args.width),\
      int(args.height), col, args.ui, args.synchronous, int(args.nb_moves), float(args.density), args.test))
 
-print(res)
+for game in res:
+    if game['p1'] > game['p2']:
+        nb_wins['p1'] += 1
+    if game['p2'] > game['p1']:
+        nb_wins['p2'] += 1
+    if game['p1'] == game['p2']:
+        nb_wins['tie'] += 1
+
+print(nb_wins)
