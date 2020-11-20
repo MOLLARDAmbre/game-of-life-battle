@@ -30,9 +30,9 @@ def exit(board):
     pygame.quit()
     return board.get_results()
 
-def game(player1, player2, width, height, col, ui, synchr, nb_moves, density, test):
+def game(player1, player2, width, height, col, ui, synchr, nb_moves, density, test, fps, rng):
 
-    board = Board(width=width, height=height, colors=col, density=density, ui=ui)
+    board = Board(width=width, height=height, colors=col, density=density, ui=ui, rng=rng)
     p1 = __import__(player1, globals(), locals(), ['Player'], 0).Player()
     p2 = __import__(player2, globals(), locals(), ['Player'], 0).Player()
 
@@ -42,7 +42,7 @@ def game(player1, player2, width, height, col, ui, synchr, nb_moves, density, te
     if ui:
         pygame.init()
         clock = pygame.time.Clock()
-        FPS = 4
+        FPS = fps
         board.draw_cells()
         pygame.display.update()
 

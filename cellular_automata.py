@@ -1,17 +1,18 @@
 import copy
-import random
 from cellular_automata_rules import next_step_cell
 from cell import Cell
 
-def init_board(density, width, height):
+def init_board(density, width, height, rng):
     """
     Initialises a board
     :param density: float between 0 and 1, representing how many cells are alive at the start at most
+    :param rng: a random.Random object responsible for providing the random numbers
     :return: 2D array of cells, randomly put on the field
     """
+    print(rng.getstate())
     board = [[Cell.DEAD for i in range(width)] for j in range(height)]
     for i in range(int(width * height * density)):
-        x, y = random.randint(0, width - 1), random.randint(0, height - 1)
+        x, y = rng.randint(0, width - 1), rng.randint(0, height - 1)
         board[y][x] = Cell.ALIVE
     return board
 
